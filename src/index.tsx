@@ -3,8 +3,14 @@ import * as ReactDOM from 'react-dom/client';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import App from './App';
 
+
+const GITHUB_BASE_URL = 'https://api.github.com/graphql';
+
 const client = new ApolloClient({
-  uri : 'https://flyby-router-demo.herokuapp.com/',
+  uri: GITHUB_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
+  },
   cache: new InMemoryCache(),
 });
 
