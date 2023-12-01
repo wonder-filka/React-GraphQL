@@ -53,6 +53,6 @@ export default function DisplayRepo() {
 
         )
     } else {
-        return null;
+        return <h3>No issues</h3>;
     }
 }

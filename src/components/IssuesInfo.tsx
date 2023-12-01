@@ -1,17 +1,20 @@
 
 import { useQuery, gql } from '@apollo/client';
 import { TIssuesInResult } from '../types/Issues';
-
+import CommentBlock from './CommentBlock';
 
 export default function IssuesInfo({ name }: { name: string }) {
     const GET_ISSUES_OPEN = gql`
     query {
         repository(owner:"wonder-filka", name: "${name}") {
           issues(first:20, states: OPEN) {
+            totalCount 
             edges {
               node {
                 title
                 url
+                id
+                body
                 comments(first: 10) {
                     edges {
                       node {
@@ -31,13 +34,20 @@ export default function IssuesInfo({ name }: { name: string }) {
 
     const { loading, error, data } = useQuery<TIssuesInResult>(GET_ISSUES_OPEN);
 
-    console.log(data?.repository.issues.edges[1].node.title)
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error : {error.message}</p>;
     if (data) {
         return (<div>
-            <h1>{name}</h1>
-            <h3>{data.repository.issues.edges[0].node.title}</h3>
+            {data?.repository.issues.edges.map(({ node }) => {
+                return (
+                    <div key={node.id}>
+                        <h3>{node.title}</h3>
+                        <p>{node.body}</p>
+                        <CommentBlock edges={node.comments.edges} idIssue={(node.id.toString())}  />
+                    </div>
+                )
+            })}
         </div>)
     } else {
         return null;

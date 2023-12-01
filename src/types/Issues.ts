@@ -11,13 +11,15 @@ export type TComment = {
 }
 
 export type TIssueComments = {
-    edges: TComment[]
+    edges: TComment[];
 }
 
 export type TIssue = {
-    comments: TIssueComments[];
+    comments: TIssueComments;
     title: string;
     url: string;
+    body: string;
+    id: number;
 }
 
 export type TIssueNode = {
