@@ -6,15 +6,17 @@ import type { SelectProps } from 'antd';
 import IssuesInfo from './IssuesInfo';
 
 const GET_REPOSITORIES = gql`
-query {
-viewer {
-    repositories(last: 20, isFork: false) {
-    nodes {
-        name
+    query {
+        viewer {
+            login
+            repositories(last: 20, isFork: false) {
+                nodes {
+                    name
+                }
+            }
+        }
+        
     }
-    }
-}
-}
 `;
 
 export default function DisplayRepo() {
@@ -42,13 +44,14 @@ export default function DisplayRepo() {
 
         return (
             <>
-                <Select style={{ width: 120 }}
+            <span>Select github repo:</span>
+                <Select style={{ width: 180 }}
                     onChange={handleChange}
                     defaultValue="pics-script"
-                    options={options} />
-                <Button type="primary" onClick={getRepoInfo}>Show</Button>
+                    options={options} /> 
+                <Button type="primary" onClick={getRepoInfo}>Submit</Button>
                 <br />
-                {isShowRepoInfo ? <IssuesInfo name={confirmedRepo} /> : ''}
+                {isShowRepoInfo ? <IssuesInfo name={confirmedRepo} username={data.viewer.login}/> : ''}
             </>
 
         )

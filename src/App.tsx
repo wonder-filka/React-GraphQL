@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>My first Apollo app 🚀</h2>
+      <h2>Github Issues Manager</h2>
       <br />
       <DisplayRepo />
     </div>

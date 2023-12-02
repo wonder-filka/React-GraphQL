@@ -10,6 +10,7 @@ export type TRepository = {
   export type TDataInResult = {
     viewer: {
       repositories: TRepositories;
+      login: string;
     };
   };
 
