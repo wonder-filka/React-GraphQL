@@ -1,7 +1,13 @@
 body {
-  margin: 5vh 5vw;
+  margin: 0;
+  background-color: #f5f5f5;
 }
 
 button, input, .ant-select {
   margin-left: 14px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
 }
